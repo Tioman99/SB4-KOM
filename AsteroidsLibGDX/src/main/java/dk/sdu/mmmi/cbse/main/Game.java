@@ -18,14 +18,14 @@ public class Game implements ApplicationListener {
 	private GameStateManager gsm;
 	
         @Override
-	public void create() {
+	public void create() { // startup method
 		
-		WIDTH = Gdx.graphics.getWidth();
+		WIDTH = Gdx.graphics.getWidth(); // gets w/h from application
 		HEIGHT = Gdx.graphics.getHeight();
 		
-		cam = new OrthographicCamera(WIDTH, HEIGHT);
-		cam.translate(WIDTH / 2, HEIGHT / 2);
-		cam.update();
+		cam = new OrthographicCamera(WIDTH, HEIGHT); // sets camera to same size as the game
+		cam.translate(WIDTH / 2, HEIGHT / 2); // center the camera onto the game
+		cam.update(); // commits the above
 		
 		Gdx.input.setInputProcessor(
 			new GameInputProcessor()
@@ -36,7 +36,7 @@ public class Game implements ApplicationListener {
 	}
 	
         @Override
-	public void render() {
+	public void render() { // game loop
 		
 		// clear screen to black
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -50,12 +50,20 @@ public class Game implements ApplicationListener {
 	}
 	
         @Override
-	public void resize(int width, int height) {}
+	public void resize(int width, int height) { // window size
+
+		}
         @Override
-	public void pause() {}
+	public void pause() { // se
+
+		}
         @Override
-	public void resume() {}
+	public void resume() { // se
+
+		}
         @Override
-	public void dispose() {}
+	public void dispose() { // se
+
+		}
 	
 }

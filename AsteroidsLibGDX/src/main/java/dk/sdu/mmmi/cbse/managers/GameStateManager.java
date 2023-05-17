@@ -16,7 +16,9 @@ public class GameStateManager {
 	}
 	
 	public void setState(int state) {
-		if(gameState != null) gameState.dispose();
+		if(gameState != null) {
+			gameState.dispose();
+		}
 		if(state == MENU) {
 			// gameState = new MenuState(this);
 		}

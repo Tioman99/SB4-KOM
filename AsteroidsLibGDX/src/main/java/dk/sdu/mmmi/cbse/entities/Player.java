@@ -10,7 +10,7 @@ public class Player extends SpaceObject {
     private boolean left;
     private boolean right;
     private boolean up;
-
+    private final float valuePi = (float) Math.PI;
     private float maxSpeed;
     private float acceleration;
     private float deceleration;
@@ -20,14 +20,14 @@ public class Player extends SpaceObject {
         x = Game.WIDTH / 2;
         y = Game.HEIGHT / 2;
 
-        maxSpeed = 300;
+        maxSpeed = 300; // pixels per second
         acceleration = 200;
         deceleration = 10;
 
-        shapex = new float[4];
+        shapex = new float[4]; // polygon will have 4 points
         shapey = new float[4];
 
-        radians = 3.1415f / 2;
+        radians = valuePi / 2;
         rotationSpeed = 3;
 
     }
@@ -36,14 +36,14 @@ public class Player extends SpaceObject {
         shapex[0] = x + MathUtils.cos(radians) * 8;
         shapey[0] = y + MathUtils.sin(radians) * 8;
 
-        shapex[1] = x + MathUtils.cos(radians - 4 * 3.1415f / 5) * 8;
-        shapey[1] = y + MathUtils.sin(radians - 4 * 3.1145f / 5) * 8;
+        shapex[1] = x + MathUtils.cos(radians - 4 * valuePi / 5) * 8;
+        shapey[1] = y + MathUtils.sin(radians - 4 * valuePi / 5) * 8; // this line had misspelled pi
 
-        shapex[2] = x + MathUtils.cos(radians + 3.1415f) * 5;
-        shapey[2] = y + MathUtils.sin(radians + 3.1415f) * 5;
+        shapex[2] = x + MathUtils.cos(radians + valuePi) * 5;
+        shapey[2] = y + MathUtils.sin(radians + valuePi) * 5;
 
-        shapex[3] = x + MathUtils.cos(radians + 4 * 3.1415f / 5) * 8;
-        shapey[3] = y + MathUtils.sin(radians + 4 * 3.1415f / 5) * 8;
+        shapex[3] = x + MathUtils.cos(radians + 4 * valuePi / 5) * 8;
+        shapey[3] = y + MathUtils.sin(radians + 4 * valuePi / 5) * 8;
     }
 
     public void setLeft(boolean b) {
@@ -73,12 +73,16 @@ public class Player extends SpaceObject {
             dy += MathUtils.sin(radians) * acceleration * dt;
         }
 
-        // deceleration
+        // speed vec
         float vec = (float) Math.sqrt(dx * dx + dy * dy);
+
+        // decelerating
         if (vec > 0) {
             dx -= (dx / vec) * deceleration * dt;
             dy -= (dy / vec) * deceleration * dt;
         }
+
+        // speed capping
         if (vec > maxSpeed) {
             dx = (dx / vec) * maxSpeed;
             dy = (dy / vec) * maxSpeed;
@@ -88,7 +92,7 @@ public class Player extends SpaceObject {
         x += dx * dt;
         y += dy * dt;
 
-        // set shape
+        // set shape, re-calculates player shape
         setShape();
 
         // screen wrap
@@ -102,11 +106,9 @@ public class Player extends SpaceObject {
 
         sr.begin(ShapeType.Line);
 
-        for (int i = 0, j = shapex.length - 1;
-                i < shapex.length;
-                j = i++) {
+        for (int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
 
-            sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+            sr.line(shapex[i], shapey[i], shapex[j], shapey[j]); // draw line between two points of two arrays
 
         }
 

@@ -11,10 +11,10 @@ public abstract class GameState {
 		init();
 	}
 	
-	public abstract void init();
+	public abstract void init(); // initialize game state
 	public abstract void update(float dt);
 	public abstract void draw();
 	public abstract void handleInput();
-	public abstract void dispose();
+	public abstract void dispose(); // use when changing to another game state
 	
 }

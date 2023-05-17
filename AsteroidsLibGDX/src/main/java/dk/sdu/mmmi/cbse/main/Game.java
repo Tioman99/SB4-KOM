@@ -44,9 +44,14 @@ public class Game implements ApplicationListener {
 		
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.draw();
-		
+
+		// testing gameKeys
+		if (GameKeys.isPressed(GameKeys.SPACE)) {
+			System.out.println("Space");
+		}
+
 		GameKeys.update();
-		
+
 	}
 	
         @Override

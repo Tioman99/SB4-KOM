@@ -2,6 +2,7 @@ package dk.sdu.mmmi.cbse.main;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import dk.sdu.mmmi.cbse.managers.GameKeys;
 
 public class Main {
 	
@@ -15,6 +16,7 @@ public class Main {
 		cfg.resizable = false;
 		
 		new LwjglApplication(new Game(), cfg);
+
 		
 	}
 	

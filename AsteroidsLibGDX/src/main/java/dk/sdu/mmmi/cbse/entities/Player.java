@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.main.Game;
 
+import java.util.ArrayList;
+
 public class Player extends SpaceObject {
 
     private float[] flamex;
@@ -17,8 +19,9 @@ public class Player extends SpaceObject {
     private float maxSpeed;
     private float acceleration;
     private float deceleration;
+    private ArrayList<Bullet> bullets;
 
-    public Player() {
+    public Player(ArrayList<Bullet> bullets) {
 
         x = Game.WIDTH / 2;
         y = Game.HEIGHT / 2;
@@ -34,6 +37,8 @@ public class Player extends SpaceObject {
 
         radians = valuePi / 2;
         rotationSpeed = 3;
+
+        this.bullets = bullets;
 
     }
 
@@ -78,7 +83,7 @@ public class Player extends SpaceObject {
 
         // I have moved setShape call up closer to the setFlame call to minimize the visual delay
         setShape();
-        
+
         // accelerating
         if (up) {
             dx += MathUtils.cos(radians) * acceleration * dt;
@@ -89,8 +94,6 @@ public class Player extends SpaceObject {
             if (accelerationTime > 0.2f) {
                 accelerationTime = 0.1f;
             }
-        } else {
-            accelerationTime = 0;
         }
 
         // turning

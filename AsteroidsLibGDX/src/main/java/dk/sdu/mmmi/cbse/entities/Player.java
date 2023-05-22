@@ -4,29 +4,29 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.main.Game;
-
 import java.util.ArrayList;
 
 public class Player extends SpaceObject {
-
-    private float[] flamex;
-    private float[] flamey;
-    private float accelerationTime;
     private boolean left;
     private boolean right;
     private boolean up;
-    private final float valuePi = (float) Math.PI;
+    private float[] flamex;
+    private float[] flamey;
+    private float accelerationTime;
     private float maxSpeed;
     private float acceleration;
     private float deceleration;
     private ArrayList<Bullet> bullets;
+    private final int maxBullets = 3;
+    private final float valuePi = (float) Math.PI;
+
 
     public Player(ArrayList<Bullet> bullets) {
 
         x = Game.WIDTH / 2;
         y = Game.HEIGHT / 2;
 
-        maxSpeed = 300; // pixels per second
+        maxSpeed = 200; // pixels per second
         acceleration = 200;
         deceleration = 10;
 
@@ -79,6 +79,15 @@ public class Player extends SpaceObject {
         up = b;
     }
 
+    public void shoot() {
+        if (bullets.size() == maxBullets) {
+            return;
+        } else {
+            bullets.add(new Bullet(x, y, radians));
+        }
+
+    }
+
     public void update(float dt) {
 
         // I have moved setShape call up closer to the setFlame call to minimize the visual delay
@@ -88,9 +97,9 @@ public class Player extends SpaceObject {
         if (up) {
             dx += MathUtils.cos(radians) * acceleration * dt;
             dy += MathUtils.sin(radians) * acceleration * dt;
-            // I prefer having only one if(up) statement, thus setFlame is called here
+            // I prefer having only one if (up) statement, thus setFlame is called here
             setFlame();
-            accelerationTime += dt;
+            accelerationTime += 5 * dt;
             if (accelerationTime > 0.2f) {
                 accelerationTime = 0.1f;
             }
@@ -134,7 +143,7 @@ public class Player extends SpaceObject {
         sr.begin(ShapeType.Line);
 
         // draw ship
-        for (int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
+        for(int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
 
             sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
             // draw a line between two points of two arrays with consecutive indexes i and j.
@@ -142,11 +151,10 @@ public class Player extends SpaceObject {
         }
 
         // draw flame
-
         sr.setColor(0, 1, 1, 1);
 
         if (up) {
-            for (int i =0, j = flamex.length - 1; i < flamex.length; j = i++) {
+            for(int i =0, j = flamex.length - 1; i < flamex.length; j = i++) {
 
                 sr.line(flamex[i], flamey[i], flamex[j], flamey[j]);
 

@@ -20,12 +20,26 @@ public class SpaceObject {
 	protected float[] shapex;
 	protected float[] shapey; // polygon
 	
-	protected void wrap() {
-		// wrapping object to opposite side of scene
-		if(x < 0) x = Game.WIDTH;
-		if(x > Game.WIDTH) x = 0;
-		if(y < 0) y = Game.HEIGHT;
-		if(y > Game.HEIGHT) y = 0; 
+	protected boolean wrap() {
+		// wrapping object to opposite side of scene and returning true if warped
+		boolean out = false;
+		if(x < 0) {
+			x = Game.WIDTH;
+			out = true;
+		}
+		if(x > Game.WIDTH) {
+			x = 0;
+			out = true;
+		}
+		if(y < 0) {
+			y = Game.HEIGHT;
+			out = true;
+		}
+		if(y > Game.HEIGHT) {
+			y = 0;
+			out = true;
+		}
+		return out;
 	}
 	
 }

@@ -19,6 +19,9 @@ public class SpaceObject {
 	
 	protected float[] shapex;
 	protected float[] shapey; // polygon
+
+	protected static final float valuePi = (float) Math.PI;
+
 	
 	protected boolean wrap() {
 		// wrapping object to opposite side of scene and returning true if warped

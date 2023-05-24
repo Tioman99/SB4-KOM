@@ -18,8 +18,6 @@ public class Player extends SpaceObject {
     private float deceleration;
     private ArrayList<Bullet> bullets;
     private final int maxBullets = 3;
-    private final float valuePi = (float) Math.PI;
-
 
     public Player(ArrayList<Bullet> bullets) {
 
@@ -145,8 +143,8 @@ public class Player extends SpaceObject {
         // draw ship
         for(int i = 0, j = shapex.length - 1; i < shapex.length; j = i++) {
 
-            sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
             // draw a line between two points of two arrays with consecutive indexes i and j.
+            sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
 
         }
 

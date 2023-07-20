@@ -29,8 +29,8 @@ public class PlayState extends GameState {
 		asteroids = new ArrayList<Asteroid>();
 		// testing
 		asteroids.add(new Asteroid(100, 100, 0));
-		asteroids.add(new Asteroid(200, 100, 1));
-		asteroids.add(new Asteroid(300, 100, 2));
+		asteroids.add(new Asteroid(200, 200, 1));
+		asteroids.add(new Asteroid(300, 300, 2));
 
 	}
 	

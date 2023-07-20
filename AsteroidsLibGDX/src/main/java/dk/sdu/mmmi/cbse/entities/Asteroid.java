@@ -40,8 +40,8 @@ public class Asteroid extends SpaceObject {
             }
         }
 
-        rotationSpeed = MathUtils.random(0.5f, -0.5f);
-        radians = MathUtils.random(2 * valuePi);
+        rotationSpeed = MathUtils.random(-1f, 1f);
+        radians = MathUtils.random(0f, 2 * valuePi);
         dx = MathUtils.cos(radians) * speed;
         dy = MathUtils.sin(radians) * speed;
 
@@ -52,7 +52,7 @@ public class Asteroid extends SpaceObject {
         radius = width / 2;
 
         for (int i = 0; i < numPoints; i++) {
-            distances[i] = MathUtils.random(radius, radius * 0.7f);
+            distances[i] = MathUtils.random(radius, radius * 0.6f); // range of size difference for an asteroid
         }
 
     }
@@ -68,7 +68,7 @@ public class Asteroid extends SpaceObject {
 
     public void update(float dt) {
         x += dx * dt;
-        x += dy * dt;
+        y += dy * dt;
         radians += rotationSpeed * dt;
         setShape();
         wrap();
